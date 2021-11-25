@@ -17,6 +17,6 @@ def deploy_mocks():
     print("Deploying Mocks...")
     if len(MockV3Aggregator) <= 0:
         MockV3Aggregator.deploy(
-            DECIMALS, Web3.toWei(STARTING_PRICE, "ether"), {"from": get_account}
+            DECIMALS, Web3.toWei(STARTING_PRICE, "ether"), {"from": get_account()}
         )
     print("Mocks Deployed!")

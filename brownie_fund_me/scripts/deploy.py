@@ -12,7 +12,7 @@ def deploy_fund_me():
             "eth_usd_price_feed"
         ]
     else:
-        deploy_mocks
+        deploy_mocks()
         price_feed_address = MockV3Aggregator[-1].address
 
     fund_me = FundMe.deploy(
