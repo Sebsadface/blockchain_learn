@@ -1,5 +1,6 @@
 from brownie import FundMe, MockV3Aggregator, network, config
 from scripts.helpful_scripts import get_account
+from web3 import Web3
 
 
 def deploy_fund_me():
@@ -15,16 +16,15 @@ def deploy_fund_me():
     else:
         print(f"The active network is {network.show_active()}")
         print("Deploying Mocks...")
-        mock_aggregator = MockV3Aggregator.deploy(
-            18, 2000000000000000000000, {"from": account}
-        )
-        price_feed_address = mock_aggregator.address
-        print("Mocks Deployed!")
+        if len(MockV3Aggregator) <= 0:
+            MockV3Aggregator.deploy(18, Web3.toWei(2000, "ether"), {"from": account})
+            price_feed_address = MockV3Aggregator[-1].address
+            print("Mocks Deployed!")
 
     fund_me = FundMe.deploy(
-        "0x8A753747A1Fa494EC906cE90E9f37563A8AF630e",
+        price_feed_address,
         {"from": account},
-        publish_source=True,
+        publish_source=config["networks"][network.show_active()].get("verify"),
     )
     print(f"Contract deployed to {fund_me.address}")
 
