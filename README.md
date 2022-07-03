@@ -1,2 +1,2 @@
-# blockchain_learn
-blockchain learning projects
+# prog_solidity
+solidity projects
