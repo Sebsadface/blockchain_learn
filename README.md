@@ -1,2 +1,2 @@
-# prog_solidity
+# solidity
 solidity projects
