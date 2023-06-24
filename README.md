@@ -1,2 +1,2 @@
-# solidity
+# sol
 solidity projects
